@@ -1,7 +1,8 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { LoginPageUi } from "src/ui/login-page";
+import { login } from "src/api/methods";
 
 export interface LoginFormI {
   email: string;
@@ -22,11 +23,12 @@ export const LoginForm: React.FC = (): JSX.Element => {
     resolver: yupResolver(schema),
   });
 
-  console.log("test errors", errors);
-
-  const onSubmit = (data: LoginFormI) => {
-    // console.log("test", data);
-    // const api = "http://dev.api.kabox.io/api/auth/login"
+  const onSubmit = async (data: LoginFormI) => {
+    try {
+      const response = await login(data);
+    } catch (error) {
+      console.log("test error", error);
+    }
   };
 
   return (

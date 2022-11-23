@@ -5,6 +5,6 @@ interface PrivateRouteI {
 }
 
 export const PrivateRoutes: React.FC = (): JSX.Element => {
-  const auth = { token: false };
+  const auth = { token: true };
   return auth.token ? <Outlet /> : <Navigate to="/login" />;
 };
