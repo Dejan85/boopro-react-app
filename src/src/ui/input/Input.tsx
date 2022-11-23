@@ -1,16 +1,18 @@
-import { ComponentType, ReactNode } from "react";
+import { ComponentType } from "react";
 import { InputStyles, StylesPropsI } from "./Input.styles";
 
 interface PropsI extends StylesPropsI {
-  children: ReactNode | ReactNode[];
+  name: string;
+  placeholder: string;
 }
 
+type ComponentProps = React.InputHTMLAttributes<HTMLInputElement>;
+
 const inputWrapping = (
-  Component: ComponentType<PropsI>,
+  Component: ComponentType<ComponentProps>,
   props: PropsI
 ): JSX.Element => {
-  const { children } = props;
-  return <Component {...props}>{children}</Component>;
+  return <Component {...props} />;
 };
 
 export const Input = (props: PropsI) => inputWrapping(InputStyles, props);

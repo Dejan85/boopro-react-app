@@ -1,5 +1,6 @@
 import { ComponentType, ReactNode } from "react";
 import {
+  ContainerCenterStyles,
   ContainerColumnStyles,
   ContainerStyles,
   StylesPropsI,
@@ -21,3 +22,5 @@ export const Container = (props: PropsI) =>
   containerWrapping(ContainerStyles, props);
 export const ContainerColumn = (props: PropsI) =>
   containerWrapping(ContainerColumnStyles, props);
+export const ContainerCenter = (props: PropsI) =>
+  containerWrapping(ContainerCenterStyles, props);
