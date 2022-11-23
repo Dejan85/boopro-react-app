@@ -2,21 +2,21 @@ import styled from "@emotion/styled";
 
 export interface StylesPropsI {
   gap?: string;
+  as?: "form";
 }
 
-export const ContainerStyles = styled.div<StylesPropsI>`
+export const Container = styled.div<StylesPropsI>`
   display: flex;
 `;
-export const ContainerColumnStyles = styled(ContainerStyles)`
+export const ContainerColumn = styled(Container)`
   flex-direction: column;
-  gap: ${({ gap }) => gap && gap};
 `;
 
-export const ContainerGrid = styled.div<StylesPropsI>`
+export const GridContainer = styled.div<StylesPropsI>`
   display: grid;
 `;
 
-export const ContainerCenterStyles = styled(ContainerStyles)`
+export const Center = styled(Container)`
   justify-content: center;
   align-items: center;
   height: 100%;

@@ -1,15 +1,38 @@
 import { Button } from "../button";
-import { Container, ContainerCenter, ContainerColumn } from "../container";
+import { Center } from "../container";
+import {
+  UseFormRegister,
+  UseFormHandleSubmit,
+  SubmitHandler,
+  FieldErrorsImpl,
+} from "react-hook-form";
+import { LoginFormI } from "src/frontend/login-form";
+import { Form } from "../form";
 import { Input } from "../input";
+import { Content } from "./enum";
 
-export const LoginPageUi: React.FC = (): JSX.Element => {
+interface PropsI {
+  register: UseFormRegister<LoginFormI>;
+  handleSubmit: UseFormHandleSubmit<LoginFormI>;
+  onSubmit: SubmitHandler<LoginFormI>;
+  errors: Partial<FieldErrorsImpl<LoginFormI>>;
+}
+
+export const LoginPageUi: React.FC<PropsI> = ({
+  errors,
+  register,
+  handleSubmit,
+  onSubmit,
+}): JSX.Element => {
+  console.log("test errors", errors);
+
   return (
-    <ContainerCenter>
-      <ContainerColumn gap="10px">
-        <Input name="username" placeholder="Username" />
-        <Input name="password" placeholder="Password" />
-        <Button text="Login" />
-      </ContainerColumn>
-    </ContainerCenter>
+    <Center>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Input placeholder="Email" {...register("email")} />
+        <Input placeholder="Password" {...register("password")} />
+        <Button>{Content.loginButton}</Button>
+      </Form>
+    </Center>
   );
 };

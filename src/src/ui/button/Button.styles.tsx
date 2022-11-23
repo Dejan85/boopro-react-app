@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
 
-export interface StylesPropsI {}
-
-export const ButtonStyles = styled.button<StylesPropsI>`
+export const Button = styled.button`
   padding: var(--pd-5);
   cursor: pointer;
 `;

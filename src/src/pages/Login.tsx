@@ -1,5 +1,5 @@
-import { LoginPageUi } from "src/ui/login-page";
+import { LoginForm } from "src/frontend/login-form";
 
 export const Login: React.FC = (): JSX.Element => {
-  return <LoginPageUi />;
+  return <LoginForm />;
 };
