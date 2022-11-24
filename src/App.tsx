@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Login, Movies } from "src/pages";
+import { Login, MoviesPage } from "src/pages";
 import { PrivateRoutes } from "src/utils";
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <Router>
       <Routes>
         <Route element={<PrivateRoutes />}>
-          <Route element={<Movies />} path="/" />
+          <Route element={<MoviesPage />} path="/" />
         </Route>
         <Route element={<Login />} path="/login" />
       </Routes>

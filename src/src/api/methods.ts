@@ -22,7 +22,7 @@ export const login = (data: LoginFormI) =>
 
 ///////////////////////////////////// GET ROUTES ///////////////////////////////////////////
 
-export const movies = (genre_id: number) =>
+export const getMovies = (genre_id: number) =>
     FetchWrapper.get({
         route: API_ROUTES.movies(genre_id),
     })

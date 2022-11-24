@@ -1,5 +1,5 @@
 import { css, Global } from "@emotion/react";
-import { paddings } from "./variables";
+import { paddings, colors, gap } from "./variables";
 
 export const globalStyles = (
   <>
@@ -18,6 +18,8 @@ export const globalStyles = (
         body {
           font-family: "Lato", sans-serif;
           ${paddings}
+          ${gap}
+          ${colors}
         }
 
         #root {
