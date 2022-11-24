@@ -9,11 +9,11 @@ axiosClient.defaults.baseURL = import.meta.env.VITE_API_HOST
 axiosClient.defaults.headers = {
     'Content-Type': 'application/json',
     Accept: 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': true
+    // 'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Allow-Credentials': true
 }
 
-axiosClient.defaults.withCredentials = true
+// axiosClient.defaults.withCredentials = true
 
 interface GetI {
     route: string
@@ -46,7 +46,7 @@ export class FetchWrapper {
                 }
             })
 
-            return res.data.data
+            return res
         } catch (err) {
             console.log('test err', err)
         }

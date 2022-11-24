@@ -1,4 +1,6 @@
-import { useEffect } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { movies } from "src/api/methods";
 import { useOnKeyDownHandler } from "src/utils";
 
 export const Movies: React.FC = (): JSX.Element => {
@@ -10,6 +12,10 @@ export const Movies: React.FC = (): JSX.Element => {
   ];
 
   useEffect(() => {
+    movies(12).then((res) => {
+      console.log("test res", res);
+    });
+
     window.onkeydown = onKeyDownHandler;
     () => {
       window.onkeydown = null;
