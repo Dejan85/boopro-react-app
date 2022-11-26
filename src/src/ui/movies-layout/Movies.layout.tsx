@@ -19,23 +19,25 @@ export const MoviesLayout: React.FC = (): JSX.Element => {
           <MovieCard />
           <MovieCard />
           <MovieCard />
-
-          {/* <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard /> */}
         </GridContainer>
       </ContainerColumn>
       <ContainerColumn>
         <P>Comedy</P>
-        <GridContainer>movies</GridContainer>
+        <GridContainer>
+          <MovieCard />
+          <MovieCard />
+          <MovieCard />
+          <MovieCard />
+          <MovieCard />
+        </GridContainer>
       </ContainerColumn>
       <ContainerColumn>
         <P>Comedy</P>
-        <GridContainer>movies</GridContainer>
+        <GridContainer>
+          <MovieCard />
+          <MovieCard />
+          <MovieCard />
+        </GridContainer>
       </ContainerColumn>
     </MoviesContainer>
   );
