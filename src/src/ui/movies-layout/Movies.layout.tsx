@@ -1,44 +1,41 @@
-import React from "react";
-import { MoviesContainer, ContainerColumn, GridContainer } from "../container";
-import { MovieCard } from "../movie-card";
+import React, { useRef, useState } from "react";
+import { MoviesResults } from "src/frontend/movies/useGetMoviesQuery";
+import { MoviesContainer, ContainerColumn } from "../container";
 import { P } from "../paragraph";
+import { Slider } from "../slider";
 
-export const MoviesLayout: React.FC = (): JSX.Element => {
+interface MoviesLayoutI {
+  data: MoviesResults;
+}
+
+export const MoviesLayout: React.FC<MoviesLayoutI> = ({
+  data,
+}): JSX.Element => {
+  const [activeGrid, setActiveGrid] = useState<number>(0);
+  const [activeCard, setActiveCard] = useState<number>(0);
+  const refs = useRef([]);
+
   return (
     <MoviesContainer>
-      <ContainerColumn>
-        <P>Comedy</P>
-        <GridContainer>
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-        </GridContainer>
-      </ContainerColumn>
-      <ContainerColumn>
-        <P>Comedy</P>
-        <GridContainer>
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-        </GridContainer>
-      </ContainerColumn>
-      <ContainerColumn>
-        <P>Comedy</P>
-        <GridContainer>
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-        </GridContainer>
-      </ContainerColumn>
+      {data?.map(({ data }, index: number) => {
+        return (
+          <ContainerColumn key={index}>
+            <P>{data?.genres}</P>
+            {data && (
+              <Slider
+                genresLength={data.genresLength}
+                movies={data.movies}
+                id={index}
+                setActiveGrid={setActiveGrid}
+                activeGrid={activeGrid}
+                setActiveCard={setActiveCard}
+                activeCard={activeCard}
+                refs={refs}
+              />
+            )}
+          </ContainerColumn>
+        );
+      })}
     </MoviesContainer>
   );
 };

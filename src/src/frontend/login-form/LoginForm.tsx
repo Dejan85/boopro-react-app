@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { LoginPageUi } from "src/ui/login-page";
+import { LoginPageUi } from "src/ui/login-layout";
 import { login } from "src/api/methods";
 
 export interface LoginFormI {

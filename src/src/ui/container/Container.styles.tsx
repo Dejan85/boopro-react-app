@@ -25,7 +25,6 @@ export const GridContainer = styled.div<StylesPropsI>`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 20% 30%;
   }
 `;
 

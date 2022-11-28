@@ -1,44 +1,69 @@
-import { useState } from "react";
+import { Dispatch, MutableRefObject, useEffect, useRef, useState } from "react";
 
 interface ReturnI {
   onKeyDownHandler: (e: KeyboardEvent) => void;
   active: number;
+  focus: boolean;
 }
 
-export const useOnKeyDownHandler = (): ReturnI => {
-  const [active, setActive] = useState<number>(0);
-
-  const x = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22,
-    23,
-  ];
+export const useOnKeyDownHandler = (
+  sliderRef: MutableRefObject<HTMLDivElement>,
+  movieCardRef: MutableRefObject<HTMLDivElement>,
+  setActive: Dispatch<React.SetStateAction<number>>,
+  active: number,
+  refs: MutableRefObject<MutableRefObject<HTMLDivElement>[]>,
+  id: number,
+  setActiveCard: Dispatch<React.SetStateAction<number>>,
+  activeCard: number,
+  maxNumberOfCards: MutableRefObject<number>,
+  genresLength: number
+): ReturnI => {
+  const [focus, setFocus] = useState<boolean>(false);
 
   const onKeyDownHandler = (e: KeyboardEvent) => {
     switch (e.key) {
       case "ArrowUp":
         setActive((prevState) => {
-          const result: number = prevState - 5;
-          if (result >= 0) {
-            return result;
-          }
-          return prevState;
+          if (prevState === 0) return genresLength;
+          return prevState - 1;
         });
         break;
       case "ArrowLeft":
-        setActive((prevState) => (prevState !== 0 ? prevState - 1 : 0));
+        setActiveCard((prevState) => {
+          if (prevState > 0) {
+            return (prevState -= 1);
+          }
+          return 0;
+        });
+
+        refs.current.forEach((item) => {
+          item.current.scrollLeft -=
+            movieCardRef.current.getBoundingClientRect().width -
+            maxNumberOfCards.current;
+        });
+
         break;
       case "ArrowRight":
-        setActive((prevState) =>
-          prevState < x.length - 1 ? prevState + 1 : x.length - 1
-        );
+        setActiveCard((prevState) => {
+          if (prevState < maxNumberOfCards.current - 1) {
+            return (prevState += 1);
+          }
+          return maxNumberOfCards.current - 1;
+        });
+
+        if (activeCard > 4 || activeCard >= maxNumberOfCards.current) {
+          refs.current.forEach((item) => {
+            item.current.scrollLeft +=
+              movieCardRef.current.getBoundingClientRect().width +
+              maxNumberOfCards.current;
+          });
+        }
+
         break;
       case "ArrowDown":
         setActive((prevState) => {
-          const result: number = prevState + 5;
-          if (result <= x.length - 1) {
-            return result;
-          }
-          return prevState;
+          if (prevState === genresLength) return 0;
+          return prevState + 1;
         });
         break;
       default:
@@ -46,8 +71,34 @@ export const useOnKeyDownHandler = (): ReturnI => {
     }
   };
 
+  useEffect(() => {
+    refs.current[id] = sliderRef;
+
+    if (sliderRef.current.tabIndex === 0) {
+      sliderRef.current.focus();
+      setFocus(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (sliderRef.current.tabIndex === active) {
+      sliderRef.current.focus();
+    }
+  }, [active]);
+
+  useEffect(() => {
+    sliderRef.current.onkeydown = onKeyDownHandler;
+    sliderRef.current.onfocus = () => setFocus(true);
+    sliderRef.current.onblur = () => setFocus(false);
+
+    () => {
+      sliderRef.current.onkeydown = null;
+    };
+  }, [activeCard]);
+
   return {
     onKeyDownHandler,
     active,
+    focus,
   };
 };
