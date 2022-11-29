@@ -5,8 +5,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import { ModalContext } from "src/context/modalContext";
-import { ResultsI } from "src/frontend/movies/useGetMoviesQuery";
+import { ResultsI } from "src/frontend/movies/types";
+import { ModalContext } from "../context/ModalContext";
 
 interface ReturnI {
   onKeyDownHandler: (e: KeyboardEvent) => void;
