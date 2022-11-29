@@ -31,12 +31,10 @@ export const useOnKeyDownHandler = (
   const { toggleModalAction, closeModalAction } = useContext(ModalContext);
 
   const onKeyDownHandler = (e: KeyboardEvent) => {
-    console.log("test", e.key);
-
     switch (e.key) {
       case "ArrowUp":
         setActive((prevState) => {
-          if (prevState === 0) return genresLength;
+          if (prevState === 0) return genresLength - 1;
           return prevState - 1;
         });
         break;
@@ -73,7 +71,7 @@ export const useOnKeyDownHandler = (
         break;
       case "ArrowDown":
         setActive((prevState) => {
-          if (prevState === genresLength) return 0;
+          if (prevState === genresLength - 1) return 0;
           return prevState + 1;
         });
         break;

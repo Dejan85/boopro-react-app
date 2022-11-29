@@ -43,8 +43,8 @@ export const useGetMoviesQuery = (page: number) => {
   const data: MoviesResults = useQueries({
     queries: genres.map(({ id, name }: { id: number; name: string }) => {
       return {
-        queryKey: [`${name}`, id],
-        queryFn: () => getMovies(id, 1),
+        queryKey: [`${name}`, id, page],
+        queryFn: () => getMovies(id, page),
         staleTime: Infinity,
         select: ({ data }: { data: DataI }) => {
           return {
@@ -60,5 +60,9 @@ export const useGetMoviesQuery = (page: number) => {
     }),
   });
 
-  return { data };
+  return {
+    data,
+    page: data[0].data?.page,
+    totalPages: data[0].data?.totalPages,
+  };
 };
