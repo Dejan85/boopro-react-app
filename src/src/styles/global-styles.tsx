@@ -24,6 +24,7 @@ export const globalStyles = (
         }
 
         #root {
+          position: relative;
           height: 100%;
         }
       `}

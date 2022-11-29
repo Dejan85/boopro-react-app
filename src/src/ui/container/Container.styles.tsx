@@ -29,6 +29,7 @@ export const GridContainer = styled.div<StylesPropsI>`
 `;
 
 export const MoviesContainer = styled(ContainerColumn)`
+  position: relative;
   background-color: var(--primary-color);
   min-height: 100%;
   padding: var(--pd-20);

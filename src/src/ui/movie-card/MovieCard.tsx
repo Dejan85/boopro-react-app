@@ -1,4 +1,4 @@
-import React, { MutableRefObject } from "react";
+import React, { MutableRefObject, useEffect } from "react";
 import { ResultsI } from "src/frontend/movies/useGetMoviesQuery";
 import { MovieCardWrapper } from "./MovieCard.styles";
 import thumbnail from "../../../assets/thumbnail.jpg";
@@ -29,6 +29,7 @@ export const MovieCard: React.FC<Props> = ({
 
   return (
     <MovieCardWrapper
+      tabIndex={0}
       ref={movieCardRef}
       style={{
         border: activeCard === id && focus ? "3px solid red" : "none",

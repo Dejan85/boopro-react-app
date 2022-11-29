@@ -39,7 +39,8 @@ export const Slider: React.FC<Props> = ({
     setActiveCard,
     activeCard,
     maxNumberOfCards,
-    genresLength
+    genresLength,
+    movies
   );
 
   return (
