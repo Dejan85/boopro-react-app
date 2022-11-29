@@ -2,7 +2,10 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { LoginPageUi } from "src/ui/login-layout";
-import { login } from "src/api/methods";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "./firebase-config";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export interface LoginFormI {
   email: string;
@@ -15,6 +18,8 @@ const schema = yup.object().shape({
 });
 
 export const LoginForm: React.FC = (): JSX.Element => {
+  const [serverError, setServerError] = useState<string | null>(null!);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -25,9 +30,17 @@ export const LoginForm: React.FC = (): JSX.Element => {
 
   const onSubmit = async (data: LoginFormI) => {
     try {
-      const response = await login(data);
-    } catch (error) {
-      console.log("test error", error);
+      const { email, password } = data;
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      window.localStorage.setItem("auth", user.user.refreshToken);
+      setServerError(null);
+      navigate("/");
+    } catch (error: any) {
+      const err = error.message
+        .replace("Firebase: Error (auth/", "")
+        .replace(").", "")
+        .replaceAll("-", " ");
+      setServerError(`${err}!`);
     }
   };
 
@@ -37,6 +50,7 @@ export const LoginForm: React.FC = (): JSX.Element => {
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
       errors={errors}
+      serverError={serverError}
     />
   );
 };
