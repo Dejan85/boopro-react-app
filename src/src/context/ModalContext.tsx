@@ -1,7 +1,7 @@
 import { createContext } from "react";
-import { modalActions, ModalContextI } from "./action";
+import { modalActions } from "./action";
 
-const ModalContext = createContext<Partial<ModalContextI>>({});
+const ModalContext = createContext<any>({});
 
 const ModalProvider = ({ children }: { children: JSX.Element }) => {
   const { state, toggleModalAction, closeModalAction } = modalActions();

@@ -1,5 +1,5 @@
 import React, { Dispatch, useRef, useState } from "react";
-import { MoviesResults } from "src/frontend/movies/useGetMoviesQuery";
+import { MoviesResults } from "src/frontend/movies/types";
 import { MoviesContainer, ContainerColumn } from "../container";
 import { PaginationComponent } from "../pagination";
 import { P } from "../paragraph";
@@ -7,7 +7,6 @@ import { Slider } from "../slider";
 
 interface MoviesLayoutI {
   data: MoviesResults;
-  page?: number;
   totalPages?: number;
   setCurrentPage: Dispatch<React.SetStateAction<number>>;
   currentPage: number;
@@ -15,7 +14,6 @@ interface MoviesLayoutI {
 
 export const MoviesLayout: React.FC<MoviesLayoutI> = ({
   data,
-  page,
   totalPages,
   setCurrentPage,
   currentPage,
@@ -26,7 +24,7 @@ export const MoviesLayout: React.FC<MoviesLayoutI> = ({
 
   return (
     <MoviesContainer>
-      {data?.map(({ data }, index: number) => {
+      {data.map(({ data }, index: number) => {
         return (
           <ContainerColumn key={index}>
             <P>{data?.genres}</P>
@@ -45,12 +43,13 @@ export const MoviesLayout: React.FC<MoviesLayoutI> = ({
           </ContainerColumn>
         );
       })}
-      <PaginationComponent
-        page={page}
-        totalPages={totalPages}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
-      />
+      {totalPages && (
+        <PaginationComponent
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
+      )}
     </MoviesContainer>
   );
 };

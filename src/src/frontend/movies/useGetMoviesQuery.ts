@@ -1,43 +1,11 @@
-import { useQueries, UseQueryResult } from "@tanstack/react-query";
+import { useQueries } from "@tanstack/react-query";
 import { getMovies } from "src/api/methods";
 import { genres } from "src/json/generes.json";
+import { DataI, MoviesResults } from "./types";
 
 export enum QueryKey {
   movies = "movies",
 }
-
-export interface ResultsI {
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  id: number;
-  original_language: string;
-  original_title: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  release_date: string;
-  title: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
-}
-
-export interface DataI {
-  page: number;
-  results: ResultsI[];
-  total_pages: number;
-  total_results: number;
-}
-
-export type MoviesResults = UseQueryResult<{
-  movies: ResultsI[];
-  page: number;
-  totalPages: number;
-  totalResults: number;
-  genres: string;
-  genresLength: number;
-}>[];
 
 export const useGetMoviesQuery = (page: number) => {
   const data: MoviesResults = useQueries({
@@ -61,8 +29,7 @@ export const useGetMoviesQuery = (page: number) => {
   });
 
   return {
-    data,
-    page: data[0].data?.page,
+    data: data,
     totalPages: data[0].data?.totalPages,
   };
 };

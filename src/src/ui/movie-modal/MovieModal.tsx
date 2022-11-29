@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useRef } from "react";
-import { ModalContext } from "src/context/modalContext";
-import { Content } from "../login-layout/enum";
+import React, { useContext, useRef } from "react";
+import { ModalContext } from "../../context/ModalContext";
 import {
   MovieModalContainer,
   MovieModalWrapper,
