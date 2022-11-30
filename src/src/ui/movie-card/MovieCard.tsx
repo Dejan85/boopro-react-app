@@ -1,7 +1,7 @@
-import React, { MutableRefObject, useEffect, useRef } from "react";
-import { ResultsI } from "src/frontend/movies/useGetMoviesQuery";
+import React, { MutableRefObject } from "react";
 import { MovieCardWrapper, Title } from "./MovieCard.styles";
 import thumbnail from "../../../assets/thumbnail.jpg";
+import { ResultsI } from "src/frontend/movies/types";
 
 interface Props {
   movie: ResultsI;

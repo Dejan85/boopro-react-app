@@ -1,5 +1,5 @@
 import React, { Dispatch, MutableRefObject, useRef } from "react";
-import { ResultsI } from "src/frontend/movies/useGetMoviesQuery";
+import { ResultsI } from "src/frontend/movies/types";
 import { useOnKeyDownHandler } from "src/utils";
 import { MovieCard } from "../movie-card";
 import { SliderWrapper } from "./Slider.styles";
